@@ -39,14 +39,14 @@ mutant-epidemics-complex-networks/
 |   `-- TFG_Rambla_Campesino_Jorge.pdf
 |-- src/
 |   |-- cleaning/
-|   |   |-- limpieza.c
-|   |   `-- limpieza2.c
+|   |   |-- high_degree_filter_cleaning.c
+|   |   `-- reciprocal_contact_cleaning.c
 |   |-- graph_sampling/
-|   |   `-- subgraf.c
+|   |   `-- random_walk_subgraph_sampler.c
 |   |-- simulation/
-|   |   |-- Xarxes5.c
-|   |   |-- suscep.c
-|   |   `-- fases6.c
+|   |   |-- mutant_trajectory_simulation.c
+|   |   |-- susceptibility_threshold_scan.c
+|   |   `-- mutation_phase_diagram_scan.c
 |-- data/
 |   `-- README.md
 |-- docs/
@@ -58,12 +58,12 @@ mutant-epidemics-complex-networks/
 
 ## Program Overview
 
-- `limpieza2.c`: cleans Pokec by keeping reciprocal relationships, removing repeated edges and self-loops, and writing cleaned node and edge files.
-- `limpieza.c`: alternative/preliminary cleaning script, including filtering of high-degree nodes and writing `nodes.dat` and `aristes.dat`.
-- `subgraf.c`: generates smaller subgraphs using a random-walk-like sampling process.
-- `Xarxes5.c`: runs a single mutant epidemic simulation and outputs temporal evolution.
-- `suscep.c`: runs many non-mutant simulations over infection rates to estimate the epidemic threshold using susceptibility.
-- `fases6.c`: runs many mutant simulations over mutation rates for a fixed infection rate to estimate survival/endemic probabilities and build the phase diagram.
+- `reciprocal_contact_cleaning.c`: cleans Pokec by keeping reciprocal relationships, removing repeated edges and self-loops, and writing cleaned node and edge files.
+- `high_degree_filter_cleaning.c`: alternative/preliminary cleaning script, including filtering of high-degree nodes and writing `nodes.dat` and `aristes.dat`.
+- `random_walk_subgraph_sampler.c`: generates smaller subgraphs using a random-walk-like sampling process.
+- `mutant_trajectory_simulation.c`: runs a single mutant epidemic simulation and outputs temporal evolution.
+- `susceptibility_threshold_scan.c`: runs many non-mutant simulations over infection rates to estimate the epidemic threshold using susceptibility.
+- `mutation_phase_diagram_scan.c`: runs many mutant simulations over mutation rates for a fixed infection rate to estimate survival/endemic probabilities and build the phase diagram.
 
 ## Main Result
 
@@ -86,22 +86,22 @@ make
 Build individual programs:
 
 ```sh
-make limpieza2
-make subgraf
-make xarxes5
-make suscep
-make fases6
+make reciprocal-clean
+make subgraph-sampler
+make mutant-trajectory
+make susceptibility-scan
+make mutation-phase-scan
 ```
 
 Equivalent direct `gcc` examples:
 
 ```sh
 mkdir -p bin
-gcc -O2 -Wall -Wextra src/cleaning/limpieza2.c -o bin/limpieza2 -lm
-gcc -O2 -Wall -Wextra src/graph_sampling/subgraf.c -o bin/subgraf -lm
-gcc -O2 -Wall -Wextra src/simulation/Xarxes5.c -o bin/Xarxes5 -lm
-gcc -O2 -Wall -Wextra src/simulation/suscep.c -o bin/suscep -lm
-gcc -O2 -Wall -Wextra src/simulation/fases6.c -o bin/fases6 -lm
+gcc -O2 -Wall -Wextra src/cleaning/reciprocal_contact_cleaning.c -o bin/reciprocal_contact_cleaning -lm
+gcc -O2 -Wall -Wextra src/graph_sampling/random_walk_subgraph_sampler.c -o bin/random_walk_subgraph_sampler -lm
+gcc -O2 -Wall -Wextra src/simulation/mutant_trajectory_simulation.c -o bin/mutant_trajectory_simulation -lm
+gcc -O2 -Wall -Wextra src/simulation/susceptibility_threshold_scan.c -o bin/susceptibility_threshold_scan -lm
+gcc -O2 -Wall -Wextra src/simulation/mutation_phase_diagram_scan.c -o bin/mutation_phase_diagram_scan -lm
 ```
 
 Remove compiled binaries:
@@ -121,11 +121,11 @@ source_node target_node
 Example:
 
 ```sh
-./bin/limpieza2
-./bin/subgraf
-./bin/Xarxes5
-./bin/suscep
-./bin/fases6
+./bin/reciprocal_contact_cleaning
+./bin/random_walk_subgraph_sampler
+./bin/mutant_trajectory_simulation
+./bin/susceptibility_threshold_scan
+./bin/mutation_phase_diagram_scan
 ```
 
 Expected generated outputs include:
@@ -137,6 +137,8 @@ Expected generated outputs include:
 - `Evol.dat`: temporal evolution from a single mutant simulation.
 - `suscep.dat`: susceptibility values across infection rates.
 - `fases2.dat`: mutation scan output for phase-diagram analysis.
+
+Some generated output filenames are preserved from the original thesis scripts to avoid changing program behavior.
 
 Generated `.dat` files are ignored by Git.
 

@@ -3,30 +3,30 @@ CFLAGS ?= -O2 -Wall -Wextra
 LDFLAGS ?= -lm
 BIN_DIR := bin
 
-.PHONY: all clean directories limpieza limpieza2 subgraf xarxes5 suscep fases6
+.PHONY: all clean directories high-degree-clean reciprocal-clean subgraph-sampler mutant-trajectory susceptibility-scan mutation-phase-scan
 
-all: limpieza limpieza2 subgraf xarxes5 suscep fases6
+all: high-degree-clean reciprocal-clean subgraph-sampler mutant-trajectory susceptibility-scan mutation-phase-scan
 
 directories:
 	mkdir -p $(BIN_DIR)
 
-limpieza: directories
-	$(CC) $(CFLAGS) src/cleaning/limpieza.c -o $(BIN_DIR)/limpieza $(LDFLAGS)
+high-degree-clean: directories
+	$(CC) $(CFLAGS) src/cleaning/high_degree_filter_cleaning.c -o $(BIN_DIR)/high_degree_filter_cleaning $(LDFLAGS)
 
-limpieza2: directories
-	$(CC) $(CFLAGS) src/cleaning/limpieza2.c -o $(BIN_DIR)/limpieza2 $(LDFLAGS)
+reciprocal-clean: directories
+	$(CC) $(CFLAGS) src/cleaning/reciprocal_contact_cleaning.c -o $(BIN_DIR)/reciprocal_contact_cleaning $(LDFLAGS)
 
-subgraf: directories
-	$(CC) $(CFLAGS) src/graph_sampling/subgraf.c -o $(BIN_DIR)/subgraf $(LDFLAGS)
+subgraph-sampler: directories
+	$(CC) $(CFLAGS) src/graph_sampling/random_walk_subgraph_sampler.c -o $(BIN_DIR)/random_walk_subgraph_sampler $(LDFLAGS)
 
-xarxes5: directories
-	$(CC) $(CFLAGS) src/simulation/Xarxes5.c -o $(BIN_DIR)/Xarxes5 $(LDFLAGS)
+mutant-trajectory: directories
+	$(CC) $(CFLAGS) src/simulation/mutant_trajectory_simulation.c -o $(BIN_DIR)/mutant_trajectory_simulation $(LDFLAGS)
 
-suscep: directories
-	$(CC) $(CFLAGS) src/simulation/suscep.c -o $(BIN_DIR)/suscep $(LDFLAGS)
+susceptibility-scan: directories
+	$(CC) $(CFLAGS) src/simulation/susceptibility_threshold_scan.c -o $(BIN_DIR)/susceptibility_threshold_scan $(LDFLAGS)
 
-fases6: directories
-	$(CC) $(CFLAGS) src/simulation/fases6.c -o $(BIN_DIR)/fases6 $(LDFLAGS)
+mutation-phase-scan: directories
+	$(CC) $(CFLAGS) src/simulation/mutation_phase_diagram_scan.c -o $(BIN_DIR)/mutation_phase_diagram_scan $(LDFLAGS)
 
 clean:
 	rm -rf $(BIN_DIR)

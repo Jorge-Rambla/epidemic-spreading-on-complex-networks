@@ -1,6 +1,6 @@
 # Program Inventory
 
-## `src/cleaning/limpieza2.c`
+## `src/cleaning/reciprocal_contact_cleaning.c`
 
 - Purpose: clean the directed Pokec relationship network by keeping reciprocal relationships and removing self-loops or repeated links.
 - Inputs: text edge list with two integer columns.
@@ -9,7 +9,7 @@
 - Role in the thesis: builds the reciprocal-contact network used as the basis for later sampling and simulations.
 - Status: core archived program.
 
-## `src/cleaning/limpieza.c`
+## `src/cleaning/high_degree_filter_cleaning.c`
 
 - Purpose: preliminary cleaning script that removes repeated links and self-loops while filtering edges attached to very high-degree nodes.
 - Inputs: text edge list with two integer columns.
@@ -18,7 +18,7 @@
 - Role in the thesis: legacy or auxiliary cleaning workflow used before the reciprocal-contact cleaning variant.
 - Status: legacy/auxiliary archived program.
 
-## `src/graph_sampling/subgraf.c`
+## `src/graph_sampling/random_walk_subgraph_sampler.c`
 
 - Purpose: generate a smaller subgraph from a larger cleaned network.
 - Inputs: text edge list with two integer columns.
@@ -27,7 +27,7 @@
 - Role in the thesis: creates computationally smaller networks for simulation experiments.
 - Status: core archived program.
 
-## `src/simulation/Xarxes5.c`
+## `src/simulation/mutant_trajectory_simulation.c`
 
 - Purpose: run one mutant epidemic simulation and record the temporal evolution of infected strains.
 - Inputs: text edge list with two integer columns, usually a cleaned network or sampled subgraph.
@@ -36,7 +36,7 @@
 - Role in the thesis: produces representative stochastic trajectories for the mutant epidemic process.
 - Status: core archived program.
 
-## `src/simulation/suscep.c`
+## `src/simulation/susceptibility_threshold_scan.c`
 
 - Purpose: run many non-mutant simulations over infection-rate values and estimate the epidemic threshold through susceptibility.
 - Inputs: text edge list with two integer columns.
@@ -45,7 +45,7 @@
 - Role in the thesis: estimates the baseline epidemic threshold `lambda_c`.
 - Status: core archived program.
 
-## `src/simulation/fases6.c`
+## `src/simulation/mutation_phase_diagram_scan.c`
 
 - Purpose: run many mutant epidemic simulations over mutation-rate values at fixed infection rate.
 - Inputs: text edge list with two integer columns.

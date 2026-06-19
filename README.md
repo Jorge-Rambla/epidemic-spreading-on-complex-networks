@@ -150,8 +150,18 @@ Generated `.dat` files are ignored by Git.
 - Direct reproducibility is not guaranteed without the original data, compiler, operating system, random seeds, and computational environment.
 - The code is archived with minimal structural changes so that the thesis methodology and simulation behavior remain intact.
 
-## Interview-Friendly Summary
+## Technical Highlights
 
-This project demonstrates stochastic simulation, complex-network analysis, C programming, dynamic memory management, phase transitions, and mathematical modelling. The code builds a workflow from empirical social-network data to event-driven epidemic simulations, then uses repeated experiments to estimate epidemic and mutation thresholds.
+This project demonstrates several technical and quantitative skills:
 
-See `docs/pipeline.md` for the workflow and `docs/program_inventory.md` for details about each archived program.
+- stochastic simulation of epidemic processes;
+- complex-network analysis using empirical social-network data;
+- C programming for computationally intensive simulations;
+- dynamic memory management and file-based data processing;
+- event-driven simulation inspired by Gillespie-style methods;
+- numerical experimentation to estimate epidemic and mutation thresholds;
+- mathematical modelling of phase-transition-like behavior in network epidemics.
+
+The repository connects empirical network preprocessing, graph sampling, epidemic simulation, and threshold estimation into a complete scientific-computing workflow.
+
+For more details, see `docs/pipeline.md` for the computational workflow and `docs/program_inventory.md` for a summary of each C program.

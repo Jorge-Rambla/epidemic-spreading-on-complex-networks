@@ -1,0 +1,38 @@
+bin/
+*.o
+*.obj
+*.exe
+*.out
+*.dat
+
+# Local datasets. The original Pokec data is intentionally not tracked.
+data/raw/
+data/*.txt
+data/*.csv
+data/*.tsv
+data/*.edges
+data/*.gz
+data/*.zip
+data/*.tar
+data/*.tar.gz
+data/*.bz2
+data/*.7z
+
+# Generated outputs and temporary files.
+results/**/*.dat
+results/tmp/
+tmp/
+temp/
+*.tmp
+*.log
+
+# Caches.
+__pycache__/
+.pytest_cache/
+.cache/
+
+# Editor and OS files.
+.DS_Store
+Thumbs.db
+*~
+*.swp
